@@ -8,23 +8,18 @@ using namespace std;
 class Solution {
 public:
     int isEulerCircuit(int V, vector<int> adj[]) {
-        vector<int> degree(V, 0);
-
+        int odd=0;
         for (int i = 0; i < V; ++i) {
-            for (int e : adj[i]) {
-                degree[e]++;
+            if(adj[i].size() & 1) {
+                odd=odd+1;
             }
         }
 
-        int cnt = count_if(degree.begin(), degree.end(), [](int e){
-            return e % 2 != 0;
-            });
-
-        if (cnt == 0) {
+        if (odd == 0) {
             return 2;
         }
 
-        if (cnt <= 2) {
+        if (odd <= 2) {
             return 1;
         }
 
